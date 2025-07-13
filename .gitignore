@@ -1,0 +1,10 @@
+.venv/
+.env
+data/
+logs/
+*.log
+data/raw/
+data/processed/
+dbt_packages/
+target/
+.ipynb_checkpoints/

@@ -1,0 +1,8 @@
+telethon
+python-dotenv
+psycopg2
+ultralytics
+dbt-postgres
+fastapi
+uvicorn
+dagster
