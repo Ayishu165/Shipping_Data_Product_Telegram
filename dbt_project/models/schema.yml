@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_telegram_messages
+    description: "Staging table that cleans raw Telegram messages. Adds message length and image presence flag."
+    columns:
+      - name: id
+        description: "Unique message ID"
+        tests: [not_null, unique]
+      - name: message_time
+        description: "Timestamp of the message"
+        tests: [not_null]
+      - name: message_length
+        description: "Character length of the message"
+
+  - name: fct_messages
+    description: "Fact table with one row per message, enriched with message length and image presence."
+    columns:
+      - name: message_id
+        description: "Foreign key to the original message ID"
+        tests: [not_null, unique]
+      - name: message_length
+        description: "Length of the message in characters"
+        tests: [not_null]
+
+  - name: dim_channels
+    description: "Dimension table containing distinct Telegram channel names"
+    columns:
+      - name: channel_name
+        description: "Name of the Telegram channel"
+        tests: [not_null, unique]
+
+  - name: dim_dates
+    description: "Dimension table for all distinct message dates"
+    columns:
+      - name: day
+        description: "Date of the message"
+        tests: [not_null]
