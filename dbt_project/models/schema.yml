@@ -7,9 +7,11 @@ models:
       - name: id
         description: "Unique message ID"
         tests: [not_null, unique]
+
       - name: message_time
         description: "Timestamp of the message"
         tests: [not_null]
+
       - name: message_length
         description: "Character length of the message"
 
@@ -19,6 +21,7 @@ models:
       - name: message_id
         description: "Foreign key to the original message ID"
         tests: [not_null, unique]
+
       - name: message_length
         description: "Length of the message in characters"
         tests: [not_null]
@@ -35,4 +38,19 @@ models:
     columns:
       - name: day
         description: "Date of the message"
+        tests: [not_null]
+
+  - name: fct_image_detections
+    description: "Fact table linking image detections to messages."
+    columns:
+      - name: image_file
+        description: "Detected image file name"
+        tests: [not_null]
+
+      - name: message_id
+        description: "Foreign key to fct_messages"
+        tests: []
+
+      - name: confidence_score
+        description: "Object detection confidence"
         tests: [not_null]
