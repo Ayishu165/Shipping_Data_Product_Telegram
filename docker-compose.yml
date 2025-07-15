@@ -1,15 +1,25 @@
-version: '3.1'
+version: '3.8'
 
 services:
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 4446
-      POSTGRES_DB: telegram_data_warehouse
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_DB: telegram_data_warehouse
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 4446
     volumes:
       - pgdata:/var/lib/postgresql/data
 
